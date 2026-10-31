@@ -23,29 +23,30 @@
 
     <section class="library" aria-labelledby="library-heading">
       <div class="library-heading">
-        <div><p class="eyebrow">THE COLLECTION</p><h2 id="library-heading">Game library</h2><p class="library-subtitle">A starter catalogue of PlayStation 2 classics.</p></div>
-        <span class="library-count" id="game-count">6 GAMES</span>
+        <div><p class="eyebrow">YOUR COLLECTION</p><h2 id="library-heading">Game library</h2><p class="library-subtitle">Choose a title from the list, then load its game file in the emulator.</p></div>
       </div>
-      <div class="library-tools">
-        <label class="search-wrap"><span class="sr-only">Search games</span><span aria-hidden="true">⌕</span><input id="game-search" type="search" placeholder="Search games or genres…"></label>
-        <div class="genre-filters" aria-label="Filter by genre">
-          <button class="filter-button active" data-genre="all" type="button">All games</button>
-          <button class="filter-button" data-genre="Action" type="button">Action</button>
-          <button class="filter-button" data-genre="Racing" type="button">Racing</button>
-          <button class="filter-button" data-genre="Adventure" type="button">Adventure</button>
-          <button class="filter-button" data-genre="Sports" type="button">Sports</button>
-        </div>
+      <label class="game-select-label" for="game-select">Select a PS2 game</label>
+      <select id="game-select" class="game-select">
+        <option value="">Choose a game…</option>
+        <option>God of War</option>
+        <option>Gran Turismo 4</option>
+        <option>Shadow of the Colossus</option>
+        <option>Ratchet &amp; Clank</option>
+        <option>Tony Hawk's Pro Skater 3</option>
+        <option>Jak and Daxter</option>
+        <option value="other">Other game</option>
+      </select>
+      <p class="library-note" id="selection-help">Selecting a title here is a library shortcut only; it does not load a game file automatically.</p>
+      <div class="how-to-load">
+        <h3>How to load a game you own</h3>
+        <ol>
+          <li>On your computer, locate your own PS2 game image file. The emulator may support formats such as ISO; check the Play! version's supported formats.</li>
+          <li>Scroll to the Play! player below and click inside it.</li>
+          <li>Use the emulator's own <strong>Open</strong> or <strong>Load</strong> file option and choose your game image from your computer.</li>
+          <li>Wait for the game to load. Keep the file on your computer; this website does not upload or store it.</li>
+        </ol>
+        <p>For a physical disc, your computer needs a compatible disc drive and the emulator must support reading it. Otherwise, use a game image you are legally allowed to use.</p>
       </div>
-      <div class="game-grid" id="game-grid">
-        <article class="game-card" data-title="God of War" data-genre="Action"><div class="game-art art-one"><span>GOD OF WAR</span><small>PS2 CLASSIC</small></div><div class="game-info"><span class="game-genre">ACTION</span><h3>God of War</h3><p>Mythology-inspired action adventure.</p></div></article>
-        <article class="game-card" data-title="Gran Turismo 4" data-genre="Racing"><div class="game-art art-two"><span>GRAN TURISMO 4</span><small>THE REAL DRIVING SIMULATOR</small></div><div class="game-info"><span class="game-genre">RACING</span><h3>Gran Turismo 4</h3><p>A landmark console racing simulator.</p></div></article>
-        <article class="game-card" data-title="Shadow of the Colossus" data-genre="Adventure"><div class="game-art art-three"><span>SHADOW<br>OF THE COLOSSUS</span><small>PS2 CLASSIC</small></div><div class="game-info"><span class="game-genre">ADVENTURE</span><h3>Shadow of the Colossus</h3><p>A quiet, atmospheric giant-slaying adventure.</p></div></article>
-        <article class="game-card" data-title="Ratchet & Clank" data-genre="Action"><div class="game-art art-four"><span>RATCHET<br>&amp; CLANK</span><small>PS2 CLASSIC</small></div><div class="game-info"><span class="game-genre">ACTION</span><h3>Ratchet &amp; Clank</h3><p>Colourful action-platforming across the galaxy.</p></div></article>
-        <article class="game-card" data-title="Tony Hawk's Pro Skater 3" data-genre="Sports"><div class="game-art art-five"><span>TONY HAWK'S<br>PRO SKATER 3</span><small>PS2 CLASSIC</small></div><div class="game-info"><span class="game-genre">SPORTS</span><h3>Tony Hawk's Pro Skater 3</h3><p>Arcade-style skateboarding and trick combos.</p></div></article>
-        <article class="game-card" data-title="Jak and Daxter" data-genre="Adventure"><div class="game-art art-six"><span>JAK<br>AND DAXTER</span><small>THE PRECURSOR LEGACY</small></div><div class="game-info"><span class="game-genre">ADVENTURE</span><h3>Jak and Daxter</h3><p>A colourful platforming adventure.</p></div></article>
-      </div>
-      <p class="no-games" id="no-games" hidden>No games match that search. Try another title or genre.</p>
-      <p class="library-note">This is a game-information catalogue, not a download list. Game images and discs are not hosted here.</p>
     </section>
 
     <section class="player-card" aria-labelledby="player-heading">
@@ -67,33 +68,13 @@
   </main>
   <footer>ChangedGames <span>·</span> Powered by the Play! open-source project</footer>
   <script>
-    (() => {
-      const search = document.getElementById('game-search');
-      const cards = [...document.querySelectorAll('.game-card')];
-      const buttons = [...document.querySelectorAll('.filter-button')];
-      const count = document.getElementById('game-count');
-      const empty = document.getElementById('no-games');
-      let genre = 'all';
-      function update() {
-        const term = search.value.trim().toLowerCase();
-        let visible = 0;
-        cards.forEach(card => {
-          const matchesText = (card.dataset.title + ' ' + card.dataset.genre).toLowerCase().includes(term);
-          const matchesGenre = genre === 'all' || card.dataset.genre === genre;
-          const show = matchesText && matchesGenre;
-          card.hidden = !show;
-          if (show) visible++;
-        });
-        count.textContent = visible + (visible === 1 ? ' GAME' : ' GAMES');
-        empty.hidden = visible !== 0;
-      }
-      search.addEventListener('input', update);
-      buttons.forEach(button => button.addEventListener('click', () => {
-        genre = button.dataset.genre;
-        buttons.forEach(item => item.classList.toggle('active', item === button));
-        update();
-      }));
-    })();
+    const gameSelect = document.getElementById('game-select');
+    const selectionHelp = document.getElementById('selection-help');
+    gameSelect.addEventListener('change', () => {
+      selectionHelp.textContent = gameSelect.value
+        ? 'Selected: ' + gameSelect.options[gameSelect.selectedIndex].text + '. Now load the matching game image using the Play! player file option below.'
+        : 'Selecting a title here is a library shortcut only; it does not load a game file automatically.';
+    });
   </script>
 </body>
 </html>
