@@ -67,6 +67,10 @@ jobs:
           rm -rf emulator
           mkdir -p emulator
           cp -R play-source/js/play_browser/build/. emulator/
+          # Emscripten resolves Play.js and Play.wasm relative to the main JS bundle.
+          mkdir -p emulator/static/js
+          cp emulator/Play.js emulator/static/js/Play.js
+          cp emulator/Play.wasm emulator/static/js/Play.wasm
           cp play-source/License.txt emulator/PLAY-LICENSE.txt
           printf 'Built from https://github.com/jpd002/Play-\n' > emulator/BUILD-SOURCE.txt
 
