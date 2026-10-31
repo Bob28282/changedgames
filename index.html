@@ -4,44 +4,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10131d">
-  <meta name="description" content="A browser-based PlayStation 2 emulator frontend.">
-  <title>ChangedGames — PS2 Player</title>
+  <meta name="description" content="ChangedGames self-hosted PlayStation 2 emulator.">
+  <title>ChangedGames — PS2 Emulator</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="/" aria-label="ChangedGames home"><span class="brand-mark">CG</span> changedgames</a>
-    <span class="platform">PLAYSTATION 2</span>
+    <span class="platform">PLAYSTATION 2 · DESKTOP PLAYER</span>
   </header>
   <main>
     <section class="intro">
       <p class="eyebrow">BROWSER EMULATOR</p>
-      <h1>Play classics.<br><span>Right in your browser.</span></h1>
-      <p class="lede">Launch the experimental Play! browser emulator. It runs on the Play! project's hosted site for now.</p>
+      <h1>Play classics.<br><span>On your desktop.</span></h1>
+      <p class="lede">A locally hosted Play! emulator build, served from this website. Choose your own game image in the player below.</p>
     </section>
     <section class="player-card" aria-labelledby="player-heading">
       <div class="player-head">
-        <div><p class="eyebrow">PLAYER</p><h2 id="player-heading">Play! — PS2 Emulator</h2></div>
-        <span class="status"><i></i> Experimental web build</span>
+        <div><p class="eyebrow">PLAYER</p><h2 id="player-heading">Play! — PlayStation 2</h2></div>
+        <span class="status"><i></i> Self-hosted build pipeline</span>
       </div>
-      <div class="screen emulator-screen">
-        <iframe title="Play! PlayStation 2 browser emulator" src="https://playjs.purei.org/" allow="fullscreen; gamepad" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <div class="screen">
+        <iframe title="ChangedGames self-hosted PlayStation 2 emulator" src="/emulator/index.html" allow="fullscreen; gamepad" allowfullscreen></iframe>
       </div>
-      <div class="controls">
-        <a class="file-button" href="https://playjs.purei.org/" target="_blank" rel="noopener noreferrer">Open emulator in new tab ↗</a>
-        <span class="file-name">If the player area stays blank, use this link.</span>
-      </div>
-      <p class="notice">Play! is experimental and game compatibility varies. Use only game images you have the legal right to use. This embedded player is hosted by the Play! project; its emulator files are not yet self-hosted in this repository.</p>
+      <p class="notice">The emulator files are built from the official Play! source and served from this site. If the player shows a missing-file page, the GitHub Actions build is still running or has failed. Use only game images you have the legal right to use; no commercial games are included.</p>
     </section>
-    <section class="steps">
-      <h2>About this build</h2>
-      <ol>
-        <li><b>Emulator</b><span>Play! is an open-source PlayStation 2 emulator with an experimental browser version.</span></li>
-        <li><b>Current setup</b><span>This page embeds the official hosted browser player. A self-hosted WebAssembly build is a separate integration step.</span></li>
-        <li><b>Game files</b><span>Load games through the emulator's own interface, where supported. No game files are included here.</span></li>
-      </ol>
+    <section class="details">
+      <div><span class="eyebrow">INPUT</span><h3>Keyboard & controller</h3><p>Click inside the emulator screen to focus keyboard input. The Play! browser build also supports gamepad input where available.</p></div>
+      <div><span class="eyebrow">COMPATIBILITY</span><h3>Experimental software</h3><p>Browser emulation is experimental. Performance and compatibility vary by game and computer. Some games may not boot or may have graphical issues.</p></div>
+      <div><span class="eyebrow">GAME FILES</span><h3>Your own files</h3><p>Use the file picker inside the emulator. ChangedGames does not host or provide game images.</p></div>
     </section>
   </main>
-  <footer>ChangedGames <span>·</span> A home for browser gaming</footer>
+  <footer>ChangedGames <span>·</span> Powered by the Play! open-source project</footer>
 </body>
 </html>
