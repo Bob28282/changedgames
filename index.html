@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10131d">
-  <meta name="description" content="ChangedGames self-hosted PlayStation 2 emulator.">
-  <title>ChangedGames — PS2 Emulator</title>
+  <meta name="description" content="ChangedGames PS2 emulator and game library.">
+  <title>ChangedGames — PS2 Library</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -17,24 +17,83 @@
     <section class="intro">
       <p class="eyebrow">BROWSER EMULATOR</p>
       <h1>Play classics.<br><span>On your desktop.</span></h1>
-      <p class="lede">A locally hosted Play! emulator build, served from this website. Choose your own game image in the player below.</p>\n      <a class="play-button" href="https://playjs.purei.org/" target="_blank" rel="noopener noreferrer">Open Play! online <span aria-hidden="true">↗</span></a>
+      <p class="lede">A locally hosted Play! emulator build, served from this website. Browse the starter library below and use your own legally obtained game image with the emulator.</p>
+      <a class="play-button" href="https://playjs.purei.org/" target="_blank" rel="noopener noreferrer">Open Play! online <span aria-hidden="true">↗</span></a>
     </section>
+
+    <section class="library" aria-labelledby="library-heading">
+      <div class="library-heading">
+        <div><p class="eyebrow">THE COLLECTION</p><h2 id="library-heading">Game library</h2><p class="library-subtitle">A starter catalogue of PlayStation 2 classics.</p></div>
+        <span class="library-count" id="game-count">6 GAMES</span>
+      </div>
+      <div class="library-tools">
+        <label class="search-wrap"><span class="sr-only">Search games</span><span aria-hidden="true">⌕</span><input id="game-search" type="search" placeholder="Search games or genres…"></label>
+        <div class="genre-filters" aria-label="Filter by genre">
+          <button class="filter-button active" data-genre="all" type="button">All games</button>
+          <button class="filter-button" data-genre="Action" type="button">Action</button>
+          <button class="filter-button" data-genre="Racing" type="button">Racing</button>
+          <button class="filter-button" data-genre="Adventure" type="button">Adventure</button>
+          <button class="filter-button" data-genre="Sports" type="button">Sports</button>
+        </div>
+      </div>
+      <div class="game-grid" id="game-grid">
+        <article class="game-card" data-title="God of War" data-genre="Action"><div class="game-art art-one"><span>GOD OF WAR</span><small>PS2 CLASSIC</small></div><div class="game-info"><span class="game-genre">ACTION</span><h3>God of War</h3><p>Mythology-inspired action adventure.</p></div></article>
+        <article class="game-card" data-title="Gran Turismo 4" data-genre="Racing"><div class="game-art art-two"><span>GRAN TURISMO 4</span><small>THE REAL DRIVING SIMULATOR</small></div><div class="game-info"><span class="game-genre">RACING</span><h3>Gran Turismo 4</h3><p>A landmark console racing simulator.</p></div></article>
+        <article class="game-card" data-title="Shadow of the Colossus" data-genre="Adventure"><div class="game-art art-three"><span>SHADOW<br>OF THE COLOSSUS</span><small>PS2 CLASSIC</small></div><div class="game-info"><span class="game-genre">ADVENTURE</span><h3>Shadow of the Colossus</h3><p>A quiet, atmospheric giant-slaying adventure.</p></div></article>
+        <article class="game-card" data-title="Ratchet & Clank" data-genre="Action"><div class="game-art art-four"><span>RATCHET<br>&amp; CLANK</span><small>PS2 CLASSIC</small></div><div class="game-info"><span class="game-genre">ACTION</span><h3>Ratchet &amp; Clank</h3><p>Colourful action-platforming across the galaxy.</p></div></article>
+        <article class="game-card" data-title="Tony Hawk's Pro Skater 3" data-genre="Sports"><div class="game-art art-five"><span>TONY HAWK'S<br>PRO SKATER 3</span><small>PS2 CLASSIC</small></div><div class="game-info"><span class="game-genre">SPORTS</span><h3>Tony Hawk's Pro Skater 3</h3><p>Arcade-style skateboarding and trick combos.</p></div></article>
+        <article class="game-card" data-title="Jak and Daxter" data-genre="Adventure"><div class="game-art art-six"><span>JAK<br>AND DAXTER</span><small>THE PRECURSOR LEGACY</small></div><div class="game-info"><span class="game-genre">ADVENTURE</span><h3>Jak and Daxter</h3><p>A colourful platforming adventure.</p></div></article>
+      </div>
+      <p class="no-games" id="no-games" hidden>No games match that search. Try another title or genre.</p>
+      <p class="library-note">This is a game-information catalogue, not a download list. Game images and discs are not hosted here.</p>
+    </section>
+
     <section class="player-card" aria-labelledby="player-heading">
       <div class="player-head">
         <div><p class="eyebrow">PLAYER</p><h2 id="player-heading">Play! — PlayStation 2</h2></div>
-        <span class="status"><i></i> Self-hosted build pipeline</span>
+        <span class="status"><i></i> Self-hosted build</span>
       </div>
       <div class="screen">
         <iframe title="ChangedGames self-hosted PlayStation 2 emulator" src="/emulator/index.html" allow="fullscreen; gamepad" allowfullscreen></iframe>
       </div>
-      <p class="notice">The emulator files are built from the official Play! source and served from this site. If the player stays blank, try the Play! online button above; the browser build is experimental and may not work on every browser. Use only game images you have the legal right to use; no commercial games are included.</p>
+      <p class="notice">The emulator files are built from the official Play! source and served from this site. Use only game images you have the legal right to use; no commercial games are included. Browser compatibility and performance vary.</p>
     </section>
+
     <section class="details">
-      <div><span class="eyebrow">INPUT</span><h3>Keyboard & controller</h3><p>Click inside the emulator screen to focus keyboard input. The Play! browser build also supports gamepad input where available.</p></div>
-      <div><span class="eyebrow">COMPATIBILITY</span><h3>Experimental software</h3><p>Browser emulation is experimental. Performance and compatibility vary by game and computer. Some games may not boot or may have graphical issues.</p></div>
+      <div><span class="eyebrow">INPUT</span><h3>Keyboard &amp; controller</h3><p>Click inside the emulator screen to focus keyboard input. The Play! browser build also supports gamepad input where available.</p></div>
+      <div><span class="eyebrow">COMPATIBILITY</span><h3>Experimental software</h3><p>Browser emulation is experimental. Some games may not boot or may have graphical issues.</p></div>
       <div><span class="eyebrow">GAME FILES</span><h3>Your own files</h3><p>Use the file picker inside the emulator. ChangedGames does not host or provide game images.</p></div>
     </section>
   </main>
   <footer>ChangedGames <span>·</span> Powered by the Play! open-source project</footer>
+  <script>
+    (() => {
+      const search = document.getElementById('game-search');
+      const cards = [...document.querySelectorAll('.game-card')];
+      const buttons = [...document.querySelectorAll('.filter-button')];
+      const count = document.getElementById('game-count');
+      const empty = document.getElementById('no-games');
+      let genre = 'all';
+      function update() {
+        const term = search.value.trim().toLowerCase();
+        let visible = 0;
+        cards.forEach(card => {
+          const matchesText = (card.dataset.title + ' ' + card.dataset.genre).toLowerCase().includes(term);
+          const matchesGenre = genre === 'all' || card.dataset.genre === genre;
+          const show = matchesText && matchesGenre;
+          card.hidden = !show;
+          if (show) visible++;
+        });
+        count.textContent = visible + (visible === 1 ? ' GAME' : ' GAMES');
+        empty.hidden = visible !== 0;
+      }
+      search.addEventListener('input', update);
+      buttons.forEach(button => button.addEventListener('click', () => {
+        genre = button.dataset.genre;
+        buttons.forEach(item => item.classList.toggle('active', item === button));
+        update();
+      }));
+    })();
+  </script>
 </body>
 </html>
