@@ -17,38 +17,31 @@
     <section class="intro">
       <p class="eyebrow">BROWSER EMULATOR</p>
       <h1>Play classics.<br><span>Right in your browser.</span></h1>
-      <p class="lede">Your PS2 player space. Load a game file you are allowed to use once the emulator core is connected.</p>
+      <p class="lede">Launch the experimental Play! browser emulator. It runs on the Play! project's hosted site for now.</p>
     </section>
-
     <section class="player-card" aria-labelledby="player-heading">
       <div class="player-head">
-        <div><p class="eyebrow">PLAYER</p><h2 id="player-heading">PS2 Emulator</h2></div>
-        <span class="status" id="core-status"><i></i> Core not installed</span>
+        <div><p class="eyebrow">PLAYER</p><h2 id="player-heading">Play! — PS2 Emulator</h2></div>
+        <span class="status"><i></i> Experimental web build</span>
       </div>
-      <div class="screen" id="screen">
-        <div class="screen-content">
-          <div class="ps-mark">PS<span>2</span></div>
-          <h3>Emulator core needed</h3>
-          <p>The website shell is ready. The Play! WebAssembly build still needs to be added before games can run.</p>
-        </div>
+      <div class="screen emulator-screen">
+        <iframe title="Play! PlayStation 2 browser emulator" src="https://playjs.purei.org/" allow="fullscreen; gamepad" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
       <div class="controls">
-        <label class="file-button" for="game-file">Choose game file</label>
-        <input id="game-file" type="file" accept=".iso,.bin,.chd,.cso,.elf">
-        <span id="file-name" class="file-name">No game selected</span>
+        <a class="file-button" href="https://playjs.purei.org/" target="_blank" rel="noopener noreferrer">Open emulator in new tab ↗</a>
+        <span class="file-name">If the player area stays blank, use this link.</span>
       </div>
-      <p class="notice">Only load game files and firmware you have the legal right to use. Selecting a file here does not start emulation until the emulator core is installed.</p>
+      <p class="notice">Play! is experimental and game compatibility varies. Use only game images you have the legal right to use. This embedded player is hosted by the Play! project; its emulator files are not yet self-hosted in this repository.</p>
     </section>
     <section class="steps">
-      <h2>What’s next</h2>
+      <h2>About this build</h2>
       <ol>
-        <li><b>Add the Play! browser build</b><span>Include its JavaScript and WebAssembly runtime.</span></li>
-        <li><b>Connect the player controls</b><span>Pass the selected game file to the emulator.</span></li>
-        <li><b>Deploy on Netlify</b><span>Publish this static site and its emulator assets.</span></li>
+        <li><b>Emulator</b><span>Play! is an open-source PlayStation 2 emulator with an experimental browser version.</span></li>
+        <li><b>Current setup</b><span>This page embeds the official hosted browser player. A self-hosted WebAssembly build is a separate integration step.</span></li>
+        <li><b>Game files</b><span>Load games through the emulator's own interface, where supported. No game files are included here.</span></li>
       </ol>
     </section>
   </main>
   <footer>ChangedGames <span>·</span> A home for browser gaming</footer>
-  <script src="/app.js"></script>
 </body>
 </html>
