@@ -41,3 +41,22 @@ footer span{color:var(--accent);padding:0 7px}
 .how-to-load li{padding-left:4px;margin:5px 0}
 .how-to-load p{color:var(--muted);font-size:12px;line-height:1.7;margin:12px 0 0}
 @media(max-width:1350px){main{width:calc(100% - 64px)}.topbar{padding:0 32px}}
+
+
+/* IndexedDB game library */
+.library-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:22px 0}
+.add-games-button{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:9px;background:var(--accent);color:#171225;font-weight:700;font-size:14px;cursor:pointer}
+.add-games-button:hover{filter:brightness(1.08)}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.library-status{font-size:12px;color:var(--muted)}
+.game-library-list{display:grid;gap:10px;max-width:900px}
+.empty-library{padding:22px;border:1px dashed #ffffff2b;border-radius:10px;color:var(--muted);font-size:13px}
+.game-entry{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 17px;background:#ffffff08;border:1px solid #ffffff12;border-radius:10px}
+.game-entry-info{min-width:0}
+.game-entry-name{font-weight:600;font-size:14px;overflow-wrap:anywhere}
+.game-entry-meta{margin-top:5px;color:var(--muted);font-size:11px}
+.game-entry-actions{display:flex;gap:8px;flex-shrink:0}
+.game-entry-actions button{padding:8px 11px;border:1px solid var(--line);border-radius:7px;background:#202638;color:var(--text);font:600 12px 'DM Sans';cursor:pointer}
+.game-entry-actions button:hover{border-color:var(--accent)}
+.game-entry-actions .delete-game{color:#ffb4b4}
+@media(max-width:700px){.game-entry{align-items:flex-start;flex-direction:column}.game-entry-actions{width:100%}}
