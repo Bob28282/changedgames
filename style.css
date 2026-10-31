@@ -25,4 +25,40 @@ main{width:1320px;margin:68px auto 88px}
 .details h3{font:600 18px 'Space Grotesk';margin:9px 0}
 .details p{font-size:13px;color:var(--muted);line-height:1.65;margin:0}
 footer{text-align:center;padding:26px;color:#7f899e;border-top:1px solid #ffffff12;font-size:12px;letter-spacing:.2px}
-footer span{color:var(--accent);padding:0 7px}\n.play-button{display:inline-flex;align-items:center;gap:12px;margin-top:12px;padding:13px 20px;border-radius:10px;background:var(--accent);color:#171225;text-decoration:none;font-weight:700;font-size:14px;transition:transform .18s ease,filter .18s ease}.play-button:hover{transform:translateY(-2px);filter:brightness(1.08)}.play-button span{font-size:17px}\n
+footer span{color:var(--accent);padding:0 7px}
+.play-button{display:inline-flex;align-items:center;gap:12px;margin-top:12px;padding:13px 20px;border-radius:10px;background:var(--accent);color:#171225;text-decoration:none;font-weight:700;font-size:14px;transition:transform .18s ease,filter .18s ease}.play-button:hover{transform:translateY(-2px);filter:brightness(1.08)}.play-button span{font-size:17px}
+
+
+/* Game library */
+.library{margin:42px 0 30px;padding:28px;background:#151a27;border:1px solid var(--line);border-radius:18px}
+.library-heading{display:flex;justify-content:space-between;align-items:center}
+.library-heading h2{font:600 30px 'Space Grotesk';margin:5px 0}
+.library-subtitle{color:var(--muted);font-size:14px;margin:6px 0}
+.library-count{font-size:11px;letter-spacing:1.5px;color:var(--accent);border:1px solid #a78bfa55;border-radius:99px;padding:9px 12px}
+.library-tools{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:24px 0}
+.search-wrap{height:42px;min-width:270px;display:flex;align-items:center;gap:10px;padding:0 13px;background:#0f1320;border:1px solid var(--line);border-radius:9px;color:var(--muted);font-size:22px}
+.search-wrap input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font:13px 'DM Sans'}
+.genre-filters{display:flex;gap:8px}
+.filter-button{border:1px solid var(--line);border-radius:99px;padding:10px 14px;background:transparent;color:var(--muted);font:600 12px 'DM Sans';cursor:pointer}
+.filter-button:hover,.filter-button.active{background:#a78bfa20;border-color:var(--accent);color:#d6c8ff}
+.game-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.game-card{overflow:hidden;background:#1d2332;border:1px solid #ffffff12;border-radius:12px;transition:transform .18s,border-color .18s}
+.game-card:hover{transform:translateY(-3px);border-color:#a78bfa88}
+.game-card[hidden]{display:none}
+.game-art{height:155px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;text-align:center;padding:18px;color:white;font-family:'Space Grotesk';font-weight:700;letter-spacing:1px;text-shadow:0 2px 10px #0009}
+.game-art span{font-size:25px;line-height:1.05}
+.game-art small{font:600 9px 'DM Sans';letter-spacing:2px}
+.art-one{background:radial-gradient(ellipse at 50% 25%,#a65d43,#34202c 55%,#11131e)}
+.art-two{background:linear-gradient(135deg,#162e49,#3c7790 48%,#101b2c)}
+.art-three{background:linear-gradient(145deg,#b6a47d,#625e4d 48%,#222a2b)}
+.art-four{background:linear-gradient(135deg,#d58d43,#6d3d81 55%,#203b67)}
+.art-five{background:linear-gradient(135deg,#b74835,#e5a447 50%,#273b51)}
+.art-six{background:linear-gradient(135deg,#397b65,#d0a64f 52%,#354c78)}
+.game-info{padding:15px 17px 17px}
+.game-genre{font-size:9px;letter-spacing:1.8px;color:var(--accent);font-weight:700}
+.game-info h3{font:600 17px 'Space Grotesk';margin:7px 0}
+.game-info p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}
+.library-note,.no-games{margin:20px 0 0;color:var(--muted);font-size:12px;line-height:1.6}
+.no-games{padding:25px;text-align:center;border:1px dashed var(--line);border-radius:10px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1350px){main{width:calc(100% - 64px)}.topbar{padding:0 32px}}
