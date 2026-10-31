@@ -25,4 +25,4 @@ main{width:1320px;margin:68px auto 88px}
 .details h3{font:600 18px 'Space Grotesk';margin:9px 0}
 .details p{font-size:13px;color:var(--muted);line-height:1.65;margin:0}
 footer{text-align:center;padding:26px;color:#7f899e;border-top:1px solid #ffffff12;font-size:12px;letter-spacing:.2px}
-footer span{color:var(--accent);padding:0 7px}
+footer span{color:var(--accent);padding:0 7px}\n.play-button{display:inline-flex;align-items:center;gap:12px;margin-top:12px;padding:13px 20px;border-radius:10px;background:var(--accent);color:#171225;text-decoration:none;font-weight:700;font-size:14px;transition:transform .18s ease,filter .18s ease}.play-button:hover{transform:translateY(-2px);filter:brightness(1.08)}.play-button span{font-size:17px}\n
