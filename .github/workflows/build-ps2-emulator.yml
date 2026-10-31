@@ -79,5 +79,7 @@ jobs:
             echo "No emulator output changes to commit."
           else
             git commit -m "Build and vendor self-hosted Play! emulator"
-            git push
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi
