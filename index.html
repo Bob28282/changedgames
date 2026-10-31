@@ -23,30 +23,17 @@
 
     <section class="library" aria-labelledby="library-heading">
       <div class="library-heading">
-        <div><p class="eyebrow">YOUR COLLECTION</p><h2 id="library-heading">Game library</h2><p class="library-subtitle">Choose a title from the list, then load its game file in the emulator.</p></div>
+        <div><p class="eyebrow">YOUR COLLECTION</p><h2 id="library-heading">Game library</h2><p class="library-subtitle">Add your own PS2 ISO files. They stay in this browser on this device.</p></div>
       </div>
-      <label class="game-select-label" for="game-select">Select a PS2 game</label>
-      <select id="game-select" class="game-select">
-        <option value="">Choose a game…</option>
-        <option>God of War</option>
-        <option>Gran Turismo 4</option>
-        <option>Shadow of the Colossus</option>
-        <option>Ratchet &amp; Clank</option>
-        <option>Tony Hawk's Pro Skater 3</option>
-        <option>Jak and Daxter</option>
-        <option value="other">Other game</option>
-      </select>
-      <p class="library-note" id="selection-help">Selecting a title here is a library shortcut only; it does not load a game file automatically.</p>
-      <div class="how-to-load">
-        <h3>How to load a game you own</h3>
-        <ol>
-          <li>On your computer, locate your own PS2 game image file. The emulator may support formats such as ISO; check the Play! version's supported formats.</li>
-          <li>Scroll to the Play! player below and click inside it.</li>
-          <li>Use the emulator's own <strong>Open</strong> or <strong>Load</strong> file option and choose your game image from your computer.</li>
-          <li>Wait for the game to load. Keep the file on your computer; this website does not upload or store it.</li>
-        </ol>
-        <p>For a physical disc, your computer needs a compatible disc drive and the emulator must support reading it. Otherwise, use a game image you are legally allowed to use.</p>
+      <div class="library-actions">
+        <label class="add-games-button" for="iso-picker">＋ Add ISO files</label>
+        <input id="iso-picker" class="visually-hidden" type="file" accept=".iso,application/octet-stream" multiple>
+        <span id="library-status" class="library-status" role="status" aria-live="polite">Your library is stored locally in this browser.</span>
       </div>
+      <div id="game-library-list" class="game-library-list">
+        <p class="empty-library">No games saved yet. Choose “Add ISO files” to add files from your computer.</p>
+      </div>
+      <p class="library-note">Files are stored in this browser using IndexedDB. They are not uploaded to Netlify or GitHub and are not synced to other devices. Browser data can be cleared, so keep your original ISO files backed up. To play a saved game, download it and choose it in the Play! emulator's file picker.</p>
     </section>
 
     <section class="player-card" aria-labelledby="player-heading">
@@ -67,14 +54,6 @@
     </section>
   </main>
   <footer>ChangedGames <span>·</span> Powered by the Play! open-source project</footer>
-  <script>
-    const gameSelect = document.getElementById('game-select');
-    const selectionHelp = document.getElementById('selection-help');
-    gameSelect.addEventListener('change', () => {
-      selectionHelp.textContent = gameSelect.value
-        ? 'Selected: ' + gameSelect.options[gameSelect.selectedIndex].text + '. Now load the matching game image using the Play! player file option below.'
-        : 'Selecting a title here is a library shortcut only; it does not load a game file automatically.';
-    });
-  </script>
+  <script src="/library.js" defer></script>
 </body>
 </html>
