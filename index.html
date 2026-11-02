@@ -8,7 +8,32 @@
   <title>ChangedGames — PS2 Library</title>
   <link rel="stylesheet" href="/style.css">
 </head>
-<body>
+<body class="login-locked">\n
+  <style>
+    #login-screen{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#fff;color:#171717;font-family:Arial,sans-serif;padding:24px}
+    #login-screen[hidden]{display:none}
+    .login-panel{width:min(100%,360px);text-align:center}
+    .login-panel h1{font-size:28px;margin:0 0 10px;letter-spacing:-.5px}
+    .login-panel p{color:#666;font-size:14px;margin:0 0 24px}
+    #login-form{display:grid;gap:12px}
+    #login-password{width:100%;box-sizing:border-box;padding:14px 15px;border:1px solid #d5d5d5;border-radius:8px;font-size:16px;color:#171717;background:#fff}
+    #login-form button{padding:14px;border:0;border-radius:8px;background:#171717;color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+    #login-form button:disabled{opacity:.6;cursor:wait}
+    #login-error{min-height:18px;color:#b42318;font-size:13px;margin:2px 0 0}
+    body.login-locked{overflow:hidden}
+  </style>
+  <section id="login-screen" aria-label="Website password">
+    <div class="login-panel">
+      <h1>ChangedGames</h1>
+      <p>Enter your password to continue</p>
+      <form id="login-form">
+        <input id="login-password" type="password" placeholder="Password" autocomplete="current-password" required autofocus>
+        <button id="login-submit" type="submit">Continue</button>
+        <p id="login-error" role="alert" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
   <header class="topbar">
     <a class="brand" href="/" aria-label="ChangedGames home"><span class="brand-mark">CG</span> changedgames</a>
     <span class="platform">PLAYSTATION 2 · DESKTOP PLAYER</span>
