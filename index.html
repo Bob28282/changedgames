@@ -193,27 +193,131 @@
     });
 
     uploadButton.addEventListener('click', async () => {
-      const file = fileInput.files && fileInput.files[0];
-      if (!file) { setStatus('Choose a file first.', true); return; }
-      uploadButton.disabled = true;
-      setStatus('Uploading ' + file.name + '…');
-      try {
-        const response = await fetch(API + '/upload?name=' + encodeURIComponent(file.name), {
-          method: 'POST',
-          headers: { Authorization: 'Bearer ' + libraryToken, 'Content-Type': 'application/octet-stream' },
-          body: file
-        });
-        const data = await response.json();
-        if (!response.ok || !data.success) throw new Error(data.error || 'Upload failed (' + response.status + ').');
-        fileInput.value = '';
-        setStatus('Upload complete. Refreshing library…');
-        await loadLibrary();
-      } catch (error) {
-        setStatus(error.message || 'Upload failed.', true);
-      } finally {
-        uploadButton.disabled = false;
+      
+const CHUNK_SIZE = 16 * 1024 * 1024; // 16 MiB
+
+uploadButton.addEventListener('click', async () => {
+  const file = fileInput.files && fileInput.files[0];
+
+  if (!file) {
+    setStatus('Choose a file first.', true);
+    return;
+  }
+
+  uploadButton.disabled = true;
+  let uploadInfo = null;
+
+  try {
+    setStatus('Preparing upload: ' + file.name);
+
+    // Create the multipart upload
+    const createResponse = await fetch(
+      API + '/upload/create?name=' + encodeURIComponent(file.name),
+      {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + libraryToken }
       }
+    );
+
+    const created = await createResponse.json();
+
+    if (!createResponse.ok || !created.uploadId || !created.key) {
+      throw new Error(created.error || 'Could not start upload.');
+    }
+
+    uploadInfo = created;
+    const parts = [];
+    const totalParts = Math.ceil(file.size / CHUNK_SIZE);
+
+    // Send each chunk in order
+    for (let partNumber = 1; partNumber <= totalParts; partNumber++) {
+      const start = (partNumber - 1) * CHUNK_SIZE;
+      const end = Math.min(start + CHUNK_SIZE, file.size);
+      const chunk = file.slice(start, end);
+
+      setStatus(
+        'Uploading ' + file.name + ': part ' +
+        partNumber + ' of ' + totalParts +
+        ' (' + Math.round((end / file.size) * 100) + '%)'
+      );
+
+      const partUrl = new URL(API + '/upload/part');
+      partUrl.searchParams.set('key', uploadInfo.key);
+      partUrl.searchParams.set('uploadId', uploadInfo.uploadId);
+      partUrl.searchParams.set('partNumber', String(partNumber));
+
+      const partResponse = await fetch(partUrl, {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + libraryToken,
+          'Content-Type': 'application/octet-stream'
+        },
+        body: chunk
+      });
+
+      const partData = await partResponse.json();
+
+      if (!partResponse.ok || !partData.etag) {
+        throw new Error(
+          partData.error || 'Upload failed on part ' + partNumber
+        );
+      }
+
+      parts.push({
+        partNumber,
+        etag: partData.etag
+      });
+    }
+
+    // Complete the multipart upload
+    setStatus('Finishing upload…');
+
+    const completeUrl = new URL(API + '/upload/complete');
+    completeUrl.searchParams.set('key', uploadInfo.key);
+    completeUrl.searchParams.set('uploadId', uploadInfo.uploadId);
+
+    const completeResponse = await fetch(completeUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + libraryToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ parts })
     });
+
+    const completed = await completeResponse.json();
+
+    if (!completeResponse.ok || !completed.success) {
+      throw new Error(completed.error || 'Could not finish upload.');
+    }
+
+    fileInput.value = '';
+    setStatus('Upload complete! Refreshing library…');
+    await loadLibrary();
+
+  } catch (error) {
+    // Try to clean up an incomplete upload
+    if (uploadInfo) {
+      try {
+        const abortUrl = new URL(API + '/upload/abort');
+        abortUrl.searchParams.set('key', uploadInfo.key);
+        abortUrl.searchParams.set('uploadId', uploadInfo.uploadId);
+
+        await fetch(abortUrl, {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + libraryToken }
+        });
+      } catch (_) {
+        // Cleanup can be retried separately if necessary.
+      }
+    }
+
+    setStatus(error.message || 'Upload failed.', true);
+  } finally {
+    uploadButton.disabled = false;
+  }
+});
+
 
     document.getElementById('library-refresh-button').addEventListener('click', loadLibrary);
     document.getElementById('library-logout-button').addEventListener('click', () => {
