@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,6 +14,7 @@
     <a class="brand" href="/" aria-label="ChangedGames home"><span class="brand-mark">CG</span> changedgames</a>
     <span class="platform">PLAYSTATION 2 · DESKTOP PLAYER</span>
   </header>
+
   <main>
     <section class="intro">
       <p class="eyebrow">BROWSER EMULATOR</p>
@@ -23,8 +25,13 @@
 
     <section class="library" aria-labelledby="library-heading">
       <div class="library-heading">
-        <div><p class="eyebrow">YOUR COLLECTION</p><h2 id="library-heading">Game library</h2><p class="library-subtitle">Choose a title from the list, then load its game file in the emulator.</p></div>
+        <div>
+          <p class="eyebrow">YOUR COLLECTION</p>
+          <h2 id="library-heading">Game library</h2>
+          <p class="library-subtitle">Choose a title from the list, then load its game file in the emulator.</p>
+        </div>
       </div>
+
       <label class="game-select-label" for="game-select">Select a PS2 game</label>
       <select id="game-select" class="game-select">
         <option value="">Choose a game…</option>
@@ -36,15 +43,20 @@
         <option>Jak and Daxter</option>
         <option value="other">Other game</option>
       </select>
+
       <p class="library-note" id="selection-help">Selecting a title here is a library shortcut only; it does not load a game file automatically.</p>
+
       <div class="how-to-load" id="cloud-library" style="margin-top:24px">
         <h3>Your online game library</h3>
         <p class="library-subtitle">Sign in to view files stored in your private library, upload a game image you are allowed to use, or download one to your computer.</p>
+
         <form id="library-login-form" style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0">
           <input id="library-password" type="password" placeholder="Library password" autocomplete="current-password" required style="flex:1;min-width:180px;padding:12px;border:1px solid #777;border-radius:8px">
           <button id="library-login-button" type="submit">Sign in</button>
         </form>
+
         <p id="library-status" role="status" aria-live="polite">Sign in to load your stored files.</p>
+
         <div id="library-tools" hidden style="margin:14px 0">
           <label for="library-file">Upload a game file you own</label>
           <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px">
@@ -54,8 +66,10 @@
             <button id="library-logout-button" type="button">Sign out</button>
           </div>
         </div>
+
         <ul id="library-files" aria-label="Stored game files" style="padding-left:20px"></ul>
       </div>
+
       <div class="how-to-load">
         <h3>How to load a game you own</h3>
         <ol>
@@ -70,26 +84,47 @@
 
     <section class="player-card" aria-labelledby="player-heading">
       <div class="player-head">
-        <div><p class="eyebrow">PLAYER</p><h2 id="player-heading">Play! — PlayStation 2</h2></div>
+        <div>
+          <p class="eyebrow">PLAYER</p>
+          <h2 id="player-heading">Play! — PlayStation 2</h2>
+        </div>
         <span class="status"><i></i> Self-hosted build</span>
       </div>
+
       <div class="screen">
         <iframe title="ChangedGames self-hosted PlayStation 2 emulator" src="/emulator/index.html" allow="fullscreen; gamepad" allowfullscreen></iframe>
       </div>
+
       <p class="notice">The emulator files are built from the official Play! source and served from this site. Use only game images you have the legal right to use; no commercial game images are provided. Browser compatibility and performance vary.</p>
     </section>
 
     <section class="details">
-      <div><span class="eyebrow">INPUT</span><h3>Keyboard &amp; controller</h3><p>Click inside the emulator screen to focus keyboard input. The Play! browser build also supports gamepad input where available.</p></div>
-      <div><span class="eyebrow">COMPATIBILITY</span><h3>Experimental software</h3><p>Browser emulation is experimental. Some games may not boot or may have graphical issues.</p></div>
-      <div><span class="eyebrow">GAME FILES</span><h3>Your own files</h3><p>Use the file picker inside the emulator. The private online library stores only files you choose to upload; ChangedGames does not provide commercial game images.</p></div>
+      <div>
+        <span class="eyebrow">INPUT</span>
+        <h3>Keyboard &amp; controller</h3>
+        <p>Click inside the emulator screen to focus keyboard input. The Play! browser build also supports gamepad input where available.</p>
+      </div>
+      <div>
+        <span class="eyebrow">COMPATIBILITY</span>
+        <h3>Experimental software</h3>
+        <p>Browser emulation is experimental. Some games may not boot or may have graphical issues.</p>
+      </div>
+      <div>
+        <span class="eyebrow">GAME FILES</span>
+        <h3>Your own files</h3>
+        <p>Use the file picker inside the emulator. The private online library stores only files you choose to upload; ChangedGames does not provide commercial game images.</p>
+      </div>
     </section>
   </main>
+
   <footer>ChangedGames <span>·</span> Powered by the Play! open-source project</footer>
+
   <script>
     const API = 'https://changedgames-api.bob-haas.workers.dev';
+
     const gameSelect = document.getElementById('game-select');
     const selectionHelp = document.getElementById('selection-help');
+
     gameSelect.addEventListener('change', () => {
       selectionHelp.textContent = gameSelect.value
         ? 'Selected: ' + gameSelect.options[gameSelect.selectedIndex].text + '. Choose the matching file from your online library or load it in the player below.'
@@ -97,6 +132,7 @@
     });
 
     let libraryToken = null;
+
     const loginForm = document.getElementById('library-login-form');
     const passwordInput = document.getElementById('library-password');
     const loginButton = document.getElementById('library-login-button');
@@ -105,6 +141,8 @@
     const filesList = document.getElementById('library-files');
     const fileInput = document.getElementById('library-file');
     const uploadButton = document.getElementById('library-upload-button');
+    const refreshButton = document.getElementById('library-refresh-button');
+    const logoutButton = document.getElementById('library-logout-button');
 
     function setStatus(message, isError = false) {
       status.textContent = message;
@@ -114,28 +152,52 @@
     async function loadLibrary() {
       setStatus('Loading your library…');
       filesList.replaceChildren();
+
       try {
         const response = await fetch(API + '/games', {
-          headers: { Authorization: 'Bearer ' + libraryToken }
+          headers: {
+            Authorization: 'Bearer ' + libraryToken
+          }
         });
-        if (!response.ok) throw new Error(response.status === 401 ? 'Session expired. Please sign in again.' : 'Could not load library (' + response.status + ').');
+
+        if (!response.ok) {
+          throw new Error(
+            response.status === 401
+              ? 'Session expired. Please sign in again.'
+              : 'Could not load library (' + response.status + ').'
+          );
+        }
+
         const data = await response.json();
         const files = Array.isArray(data.files) ? data.files : [];
+
         if (!files.length) {
           setStatus('Your library is empty. Upload a game file you are allowed to use.');
           return;
         }
+
         setStatus(files.length + ' file' + (files.length === 1 ? '' : 's') + ' in your library.');
+
         for (const file of files) {
           const item = document.createElement('li');
           item.style.margin = '10px 0';
+
           const label = document.createElement('span');
-          const name = String(file.key || '').split('/').pop().replace(/^[0-9a-f-]{36}-/i, '');
+          const name = String(file.key || '')
+            .split('/')
+            .pop()
+            .replace(/^[0-9a-f-]{36}-/i, '');
+
           label.textContent = name + ' (' + Number(file.size || 0).toLocaleString() + ' bytes) ';
+
           const download = document.createElement('button');
           download.type = 'button';
           download.textContent = 'Download';
-          download.addEventListener('click', () => downloadFile(file.key, name, download));
+
+          download.addEventListener('click', () => {
+            downloadFile(file.key, name, download);
+          });
+
           item.append(label, download);
           filesList.append(item);
         }
@@ -146,21 +208,35 @@
 
     async function downloadFile(key, name, button) {
       button.disabled = true;
+
       try {
-        const response = await fetch(API + '/download?key=' + encodeURIComponent(key), {
-          headers: { Authorization: 'Bearer ' + libraryToken }
-        });
-        if (!response.ok) throw new Error('Download failed (' + response.status + ').');
+        const response = await fetch(
+          API + '/download?key=' + encodeURIComponent(key),
+          {
+            headers: {
+              Authorization: 'Bearer ' + libraryToken
+            }
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error('Download failed (' + response.status + ').');
+        }
+
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
+
         link.href = url;
         link.download = name;
+
         document.body.append(link);
         link.click();
         link.remove();
+
         setTimeout(() => URL.revokeObjectURL(url), 30000);
         setStatus('Download started: ' + name);
+
       } catch (error) {
         setStatus(error.message || 'Download failed.', true);
       } finally {
@@ -168,23 +244,37 @@
       }
     }
 
+    // LOGIN
     loginForm.addEventListener('submit', async (event) => {
       event.preventDefault();
+
       loginButton.disabled = true;
       setStatus('Signing in…');
+
       try {
         const response = await fetch(API + '/login', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: passwordInput.value })
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            password: passwordInput.value
+          })
         });
+
         const data = await response.json();
-        if (!response.ok || !data.token) throw new Error(data.error || 'Sign-in failed. Check the password.');
+
+        if (!response.ok || !data.token) {
+          throw new Error(data.error || 'Sign-in failed. Check the password.');
+        }
+
         libraryToken = data.token;
         passwordInput.value = '';
         toolsPanel.hidden = false;
         loginForm.hidden = true;
+
         await loadLibrary();
+
       } catch (error) {
         setStatus(error.message || 'Sign-in failed.', true);
       } finally {
@@ -192,140 +282,145 @@
       }
     });
 
+    // MULTIPART UPLOAD
+    const CHUNK_SIZE = 16 * 1024 * 1024; // 16 MiB
+
     uploadButton.addEventListener('click', async () => {
-      
-const CHUNK_SIZE = 16 * 1024 * 1024; // 16 MiB
+      const file = fileInput.files && fileInput.files[0];
 
-uploadButton.addEventListener('click', async () => {
-  const file = fileInput.files && fileInput.files[0];
-
-  if (!file) {
-    setStatus('Choose a file first.', true);
-    return;
-  }
-
-  uploadButton.disabled = true;
-  let uploadInfo = null;
-
-  try {
-    setStatus('Preparing upload: ' + file.name);
-
-    // Create the multipart upload
-    const createResponse = await fetch(
-      API + '/upload/create?name=' + encodeURIComponent(file.name),
-      {
-        method: 'POST',
-        headers: { Authorization: 'Bearer ' + libraryToken }
+      if (!file) {
+        setStatus('Choose a file first.', true);
+        return;
       }
-    );
 
-    const created = await createResponse.json();
+      uploadButton.disabled = true;
+      let uploadInfo = null;
 
-    if (!createResponse.ok || !created.uploadId || !created.key) {
-      throw new Error(created.error || 'Could not start upload.');
-    }
+      try {
+        setStatus('Preparing upload: ' + file.name);
 
-    uploadInfo = created;
-    const parts = [];
-    const totalParts = Math.ceil(file.size / CHUNK_SIZE);
-
-    // Send each chunk in order
-    for (let partNumber = 1; partNumber <= totalParts; partNumber++) {
-      const start = (partNumber - 1) * CHUNK_SIZE;
-      const end = Math.min(start + CHUNK_SIZE, file.size);
-      const chunk = file.slice(start, end);
-
-      setStatus(
-        'Uploading ' + file.name + ': part ' +
-        partNumber + ' of ' + totalParts +
-        ' (' + Math.round((end / file.size) * 100) + '%)'
-      );
-
-      const partUrl = new URL(API + '/upload/part');
-      partUrl.searchParams.set('key', uploadInfo.key);
-      partUrl.searchParams.set('uploadId', uploadInfo.uploadId);
-      partUrl.searchParams.set('partNumber', String(partNumber));
-
-      const partResponse = await fetch(partUrl, {
-        method: 'POST',
-        headers: {
-          Authorization: 'Bearer ' + libraryToken,
-          'Content-Type': 'application/octet-stream'
-        },
-        body: chunk
-      });
-
-      const partData = await partResponse.json();
-
-      if (!partResponse.ok || !partData.etag) {
-        throw new Error(
-          partData.error || 'Upload failed on part ' + partNumber
+        const createResponse = await fetch(
+          API + '/upload/create?name=' + encodeURIComponent(file.name),
+          {
+            method: 'POST',
+            headers: {
+              Authorization: 'Bearer ' + libraryToken
+            }
+          }
         );
+
+        const created = await createResponse.json();
+
+        if (!createResponse.ok || !created.uploadId || !created.key) {
+          throw new Error(created.error || 'Could not start upload.');
+        }
+
+        uploadInfo = created;
+
+        const parts = [];
+        const totalParts = Math.ceil(file.size / CHUNK_SIZE);
+
+        for (let partNumber = 1; partNumber <= totalParts; partNumber++) {
+          const start = (partNumber - 1) * CHUNK_SIZE;
+          const end = Math.min(start + CHUNK_SIZE, file.size);
+          const chunk = file.slice(start, end);
+
+          setStatus(
+            'Uploading ' + file.name + ': part ' +
+            partNumber + ' of ' + totalParts +
+            ' (' + Math.round((end / file.size) * 100) + '%)'
+          );
+
+          const partUrl = new URL(API + '/upload/part');
+          partUrl.searchParams.set('key', uploadInfo.key);
+          partUrl.searchParams.set('uploadId', uploadInfo.uploadId);
+          partUrl.searchParams.set('partNumber', String(partNumber));
+
+          const partResponse = await fetch(partUrl, {
+            method: 'POST',
+            headers: {
+              Authorization: 'Bearer ' + libraryToken,
+              'Content-Type': 'application/octet-stream'
+            },
+            body: chunk
+          });
+
+          const partData = await partResponse.json();
+
+          if (!partResponse.ok || !partData.etag) {
+            throw new Error(
+              partData.error || 'Upload failed on part ' + partNumber
+            );
+          }
+
+          parts.push({
+            partNumber,
+            etag: partData.etag
+          });
+        }
+
+        setStatus('Finishing upload…');
+
+        const completeUrl = new URL(API + '/upload/complete');
+        completeUrl.searchParams.set('key', uploadInfo.key);
+        completeUrl.searchParams.set('uploadId', uploadInfo.uploadId);
+
+        const completeResponse = await fetch(completeUrl, {
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer ' + libraryToken,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ parts })
+        });
+
+        const completed = await completeResponse.json();
+
+        if (!completeResponse.ok || !completed.success) {
+          throw new Error(completed.error || 'Could not finish upload.');
+        }
+
+        fileInput.value = '';
+        setStatus('Upload complete! Refreshing library…');
+
+        await loadLibrary();
+
+      } catch (error) {
+        if (uploadInfo) {
+          try {
+            const abortUrl = new URL(API + '/upload/abort');
+            abortUrl.searchParams.set('key', uploadInfo.key);
+            abortUrl.searchParams.set('uploadId', uploadInfo.uploadId);
+
+            await fetch(abortUrl, {
+              method: 'POST',
+              headers: {
+                Authorization: 'Bearer ' + libraryToken
+              }
+            });
+          } catch (_) {
+            // Incomplete uploads can be cleaned up separately.
+          }
+        }
+
+        setStatus(error.message || 'Upload failed.', true);
+
+      } finally {
+        uploadButton.disabled = false;
       }
-
-      parts.push({
-        partNumber,
-        etag: partData.etag
-      });
-    }
-
-    // Complete the multipart upload
-    setStatus('Finishing upload…');
-
-    const completeUrl = new URL(API + '/upload/complete');
-    completeUrl.searchParams.set('key', uploadInfo.key);
-    completeUrl.searchParams.set('uploadId', uploadInfo.uploadId);
-
-    const completeResponse = await fetch(completeUrl, {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + libraryToken,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ parts })
     });
 
-    const completed = await completeResponse.json();
+    // REFRESH LIBRARY
+    refreshButton.addEventListener('click', loadLibrary);
 
-    if (!completeResponse.ok || !completed.success) {
-      throw new Error(completed.error || 'Could not finish upload.');
-    }
-
-    fileInput.value = '';
-    setStatus('Upload complete! Refreshing library…');
-    await loadLibrary();
-
-  } catch (error) {
-    // Try to clean up an incomplete upload
-    if (uploadInfo) {
-      try {
-        const abortUrl = new URL(API + '/upload/abort');
-        abortUrl.searchParams.set('key', uploadInfo.key);
-        abortUrl.searchParams.set('uploadId', uploadInfo.uploadId);
-
-        await fetch(abortUrl, {
-          method: 'POST',
-          headers: { Authorization: 'Bearer ' + libraryToken }
-        });
-      } catch (_) {
-        // Cleanup can be retried separately if necessary.
-      }
-    }
-
-    setStatus(error.message || 'Upload failed.', true);
-  } finally {
-    uploadButton.disabled = false;
-  }
-});
-
-
-    document.getElementById('library-refresh-button').addEventListener('click', loadLibrary);
-    document.getElementById('library-logout-button').addEventListener('click', () => {
+    // LOG OUT
+    logoutButton.addEventListener('click', () => {
       libraryToken = null;
       toolsPanel.hidden = true;
       loginForm.hidden = false;
       filesList.replaceChildren();
       passwordInput.value = '';
+
       setStatus('Signed out. Sign in to load your stored files.');
     });
   </script>
