@@ -391,11 +391,17 @@ async function downloadFile(key, name, button) {
     // Write the response stream directly to the selected file.
     writable = await fileHandle.createWritable();
 
-    await response.body.pipeTo(writable);
-
-    writable = null;
-
-    setStatus('Download complete: ' + name);
+try {
+  await response.body.pipeTo(writable);
+  writable = null;
+  setStatus('Download complete: ' + name);
+} catch (error) {
+  writable = null;
+  throw new Error(
+    'Download interrupted. Check your connection and available disk space. ' +
+    (error.message || '')
+  );
+}
 
   } catch (error) {
     if (writable) {
