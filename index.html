@@ -327,79 +327,95 @@
     }
 
     // DOWNLOAD FILE
-    async function downloadFile(key, name, button) {
-      button.disabled = true;
-      setStatus('Downloading ' + name + '…');
+   
+async function downloadFile(key, name, button) {
+  button.disabled = true;
+  setStatus('Choose where to save ' + name + '…');
 
-      let objectUrl = null;
+  let writable = null;
+
+  try {
+    if (!libraryToken) {
+      throw new Error('Please sign in again.');
+    }
+
+    // Chrome's native save dialog.
+    if (!window.showSaveFilePicker) {
+      throw new Error(
+        'Your browser does not support direct streaming downloads. Use desktop Chrome over HTTPS.'
+      );
+    }
+
+    // Ask for a destination before starting the download.
+    const fileHandle = await window.showSaveFilePicker({
+      suggestedName: name || 'download.iso'
+    });
+
+    setStatus('Connecting to your online library…');
+
+    const downloadUrl = new URL(API + '/download');
+    downloadUrl.searchParams.set('key', key);
+
+    const response = await fetch(downloadUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + libraryToken
+      }
+    });
+
+    if (!response.ok) {
+      let message = 'Download failed (' + response.status + ').';
 
       try {
-        if (!libraryToken) {
-          throw new Error('Please sign in again.');
-        }
+        const data = await response.json();
+        if (data.error) message = data.error;
+      } catch (_) {}
 
-        const downloadUrl = new URL(API + '/download');
-        downloadUrl.searchParams.set('key', key);
-
-        const response = await fetch(downloadUrl, {
-          method: 'GET',
-          headers: {
-            Authorization: 'Bearer ' + libraryToken
-          }
-        });
-
-        if (!response.ok) {
-          let message = 'Download failed (' + response.status + ').';
-
-          try {
-            const data = await response.json();
-            if (data.error) {
-              message = data.error;
-            }
-          } catch (_) {}
-
-          throw new Error(message);
-        }
-
-        const blob = await response.blob();
-
-        if (!blob.size) {
-          throw new Error('The downloaded file is empty.');
-        }
-
-        objectUrl = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = objectUrl;
-        link.download = name || 'download';
-        link.style.display = 'none';
-
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-
-        setStatus(
-          'Download started: ' +
-          name +
-          ' (' +
-          (blob.size / 1024 / 1024).toFixed(2) +
-          ' MB)'
-        );
-
-      } catch (error) {
-        console.error('Download error:', error);
-        setStatus(error.message || 'Download failed.', true);
-
-      } finally {
-        if (objectUrl) {
-          setTimeout(() => {
-            URL.revokeObjectURL(objectUrl);
-          }, 60000);
-        }
-
-        button.disabled = false;
-      }
+      throw new Error(message);
     }
+
+    if (!response.body) {
+      throw new Error('Your browser did not provide a download stream.');
+    }
+
+    const contentLength = Number(
+      response.headers.get('Content-Length') || 0
+    );
+
+    const sizeText = contentLength
+      ? (contentLength / 1024 / 1024 / 1024).toFixed(2) + ' GB'
+      : 'unknown size';
+
+    setStatus('Streaming ' + name + ' (' + sizeText + ')…');
+
+    // Write the response stream directly to the selected file.
+    writable = await fileHandle.createWritable();
+
+    await response.body.pipeTo(writable);
+
+    writable = null;
+
+    setStatus('Download complete: ' + name);
+
+  } catch (error) {
+    if (writable) {
+      try {
+        await writable.abort();
+      } catch (_) {}
+    }
+
+    if (error.name === 'AbortError') {
+      setStatus('Download cancelled.');
+    } else {
+      console.error('Streaming download error:', error);
+      setStatus(error.message || 'Download failed.', true);
+    }
+
+  } finally {
+    button.disabled = false;
+  }
+}
+
 
     // DELETE FILE
     async function deleteFile(key, name, button) {
