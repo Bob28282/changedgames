@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,7 +10,9 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="/" aria-label="ChangedGames home"><span class="brand-mark">CG</span> changedgames</a>
+    <a class="brand" href="/" aria-label="ChangedGames home">
+      <span class="brand-mark">CG</span> changedgames
+    </a>
     <span class="platform">PLAYSTATION 2 · DESKTOP PLAYER</span>
   </header>
 
@@ -19,8 +20,17 @@
     <section class="intro">
       <p class="eyebrow">BROWSER EMULATOR</p>
       <h1>Play classics.<br><span>On your desktop.</span></h1>
-      <p class="lede">A locally hosted Play! emulator build, served from this website. Browse the starter library below and use your own legally obtained game image with the emulator.</p>
-      <a class="play-button" href="https://playjs.purei.org/" target="_blank" rel="noopener noreferrer">Open Play! online <span aria-hidden="true">↗</span></a>
+      <p class="lede">
+        A locally hosted Play! emulator build, served from this website.
+        Browse the starter library below and use your own legally obtained
+        game image with the emulator.
+      </p>
+      <a class="play-button"
+         href="https://playjs.purei.org/"
+         target="_blank"
+         rel="noopener noreferrer">
+        Open Play! online <span aria-hidden="true">↗</span>
+      </a>
     </section>
 
     <section class="library" aria-labelledby="library-heading">
@@ -28,11 +38,16 @@
         <div>
           <p class="eyebrow">YOUR COLLECTION</p>
           <h2 id="library-heading">Game library</h2>
-          <p class="library-subtitle">Choose a title from the list, then load its game file in the emulator.</p>
+          <p class="library-subtitle">
+            Choose a title from the list, then load its game file in the emulator.
+          </p>
         </div>
       </div>
 
-      <label class="game-select-label" for="game-select">Select a PS2 game</label>
+      <label class="game-select-label" for="game-select">
+        Select a PS2 game
+      </label>
+
       <select id="game-select" class="game-select">
         <option value="">Choose a game…</option>
         <option>God of War</option>
@@ -44,41 +59,94 @@
         <option value="other">Other game</option>
       </select>
 
-      <p class="library-note" id="selection-help">Selecting a title here is a library shortcut only; it does not load a game file automatically.</p>
+      <p class="library-note" id="selection-help">
+        Selecting a title here is a library shortcut only; it does not load a game file automatically.
+      </p>
 
       <div class="how-to-load" id="cloud-library" style="margin-top:24px">
         <h3>Your online game library</h3>
-        <p class="library-subtitle">Sign in to view files stored in your private library, upload a game image you are allowed to use, or download one to your computer.</p>
+        <p class="library-subtitle">
+          Sign in to view files stored in your private library, upload a game
+          image you are allowed to use, or download one to your computer.
+        </p>
 
-        <form id="library-login-form" style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0">
-          <input id="library-password" type="password" placeholder="Library password" autocomplete="current-password" required style="flex:1;min-width:180px;padding:12px;border:1px solid #777;border-radius:8px">
-          <button id="library-login-button" type="submit">Sign in</button>
+        <form id="library-login-form"
+              style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0">
+          <input
+            id="library-password"
+            type="password"
+            placeholder="Library password"
+            autocomplete="current-password"
+            required
+            style="flex:1;min-width:180px;padding:12px;border:1px solid #777;border-radius:8px">
+
+          <button id="library-login-button" type="submit">
+            Sign in
+          </button>
         </form>
 
-        <p id="library-status" role="status" aria-live="polite">Sign in to load your stored files.</p>
+        <p id="library-status" role="status" aria-live="polite">
+          Sign in to load your stored files.
+        </p>
 
         <div id="library-tools" hidden style="margin:14px 0">
           <label for="library-file">Upload a game file you own</label>
+
           <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px">
-            <input id="library-file" type="file" accept=".iso,.cso,.chd,.isz,.bin,.elf">
-            <button id="library-upload-button" type="button">Upload file</button>
-            <button id="library-refresh-button" type="button">Refresh list</button>
-            <button id="library-logout-button" type="button">Sign out</button>
+            <input
+              id="library-file"
+              type="file"
+              accept=".iso,.cso,.chd,.isz,.bin,.elf">
+
+            <button id="library-upload-button" type="button">
+              Upload file
+            </button>
+
+            <button id="library-refresh-button" type="button">
+              Refresh list
+            </button>
+
+            <button id="library-logout-button" type="button">
+              Sign out
+            </button>
           </div>
         </div>
 
-        <ul id="library-files" aria-label="Stored game files" style="padding-left:20px"></ul>
+        <ul id="library-files"
+            aria-label="Stored game files"
+            style="padding-left:20px"></ul>
       </div>
 
       <div class="how-to-load">
         <h3>How to load a game you own</h3>
+
         <ol>
-          <li>On your computer, locate your own PS2 game image file. The emulator may support formats such as ISO; check the Play! version's supported formats.</li>
-          <li>If the game is in your online library, download it first. Then scroll to the Play! player below and click inside it.</li>
-          <li>Use the emulator's own <strong>Open</strong> or <strong>Load</strong> file option and choose your game image from your computer.</li>
-          <li>Wait for the game to load. Your online library stores files you choose to upload; the emulator still opens a downloaded file from your computer.</li>
+          <li>
+            On your computer, locate your own PS2 game image file.
+            The emulator may support formats such as ISO; check the Play!
+            version's supported formats.
+          </li>
+          <li>
+            If the game is in your online library, download it first.
+            Then scroll to the Play! player below and click inside it.
+          </li>
+          <li>
+            Use the emulator's own <strong>Open</strong> or
+            <strong>Load</strong> file option and choose your game image
+            from your computer.
+          </li>
+          <li>
+            Wait for the game to load. Your online library stores files
+            you choose to upload; the emulator still opens a downloaded
+            file from your computer.
+          </li>
         </ol>
-        <p>For a physical disc, your computer needs a compatible disc drive and the emulator must support reading it. Otherwise, use a game image you are legally allowed to use.</p>
+
+        <p>
+          For a physical disc, your computer needs a compatible disc drive
+          and the emulator must support reading it. Otherwise, use a game
+          image you are legally allowed to use.
+        </p>
       </div>
     </section>
 
@@ -88,36 +156,61 @@
           <p class="eyebrow">PLAYER</p>
           <h2 id="player-heading">Play! — PlayStation 2</h2>
         </div>
+
         <span class="status"><i></i> Self-hosted build</span>
       </div>
 
       <div class="screen">
-        <iframe title="ChangedGames self-hosted PlayStation 2 emulator" src="/emulator/index.html" allow="fullscreen; gamepad" allowfullscreen></iframe>
+        <iframe
+          title="ChangedGames self-hosted PlayStation 2 emulator"
+          src="/emulator/index.html"
+          allow="fullscreen; gamepad"
+          allowfullscreen>
+        </iframe>
       </div>
 
-      <p class="notice">The emulator files are built from the official Play! source and served from this site. Use only game images you have the legal right to use; no commercial game images are provided. Browser compatibility and performance vary.</p>
+      <p class="notice">
+        The emulator files are built from the official Play! source and
+        served from this site. Use only game images you have the legal
+        right to use; no commercial game images are provided. Browser
+        compatibility and performance vary.
+      </p>
     </section>
 
     <section class="details">
       <div>
         <span class="eyebrow">INPUT</span>
         <h3>Keyboard &amp; controller</h3>
-        <p>Click inside the emulator screen to focus keyboard input. The Play! browser build also supports gamepad input where available.</p>
+        <p>
+          Click inside the emulator screen to focus keyboard input.
+          The Play! browser build also supports gamepad input where available.
+        </p>
       </div>
+
       <div>
         <span class="eyebrow">COMPATIBILITY</span>
         <h3>Experimental software</h3>
-        <p>Browser emulation is experimental. Some games may not boot or may have graphical issues.</p>
+        <p>
+          Browser emulation is experimental. Some games may not boot
+          or may have graphical issues.
+        </p>
       </div>
+
       <div>
         <span class="eyebrow">GAME FILES</span>
         <h3>Your own files</h3>
-        <p>Use the file picker inside the emulator. The private online library stores only files you choose to upload; ChangedGames does not provide commercial game images.</p>
+        <p>
+          Use the file picker inside the emulator. The private online
+          library stores only files you choose to upload; ChangedGames
+          does not provide commercial game images.
+        </p>
       </div>
     </section>
   </main>
 
-  <footer>ChangedGames <span>·</span> Powered by the Play! open-source project</footer>
+  <footer>
+    ChangedGames <span>·</span> Powered by the Play! open-source project
+  </footer>
 
   <script>
     const API = 'https://changedgames-api.bob-haas.workers.dev';
@@ -127,7 +220,9 @@
 
     gameSelect.addEventListener('change', () => {
       selectionHelp.textContent = gameSelect.value
-        ? 'Selected: ' + gameSelect.options[gameSelect.selectedIndex].text + '. Choose the matching file from your online library or load it in the player below.'
+        ? 'Selected: ' +
+          gameSelect.options[gameSelect.selectedIndex].text +
+          '. Choose the matching file from your online library or load it in the player below.'
         : 'Selecting a title here is a library shortcut only; it does not load a game file automatically.';
     });
 
@@ -149,6 +244,7 @@
       status.style.color = isError ? '#b42318' : '';
     }
 
+    // LOAD LIBRARY
     async function loadLibrary() {
       setStatus('Loading your library…');
       filesList.replaceChildren();
@@ -172,24 +268,37 @@
         const files = Array.isArray(data.files) ? data.files : [];
 
         if (!files.length) {
-          setStatus('Your library is empty. Upload a game file you are allowed to use.');
+          setStatus(
+            'Your library is empty. Upload a game file you are allowed to use.'
+          );
           return;
         }
 
-        setStatus(files.length + ' file' + (files.length === 1 ? '' : 's') + ' in your library.');
+        setStatus(
+          files.length +
+          ' file' +
+          (files.length === 1 ? '' : 's') +
+          ' in your library.'
+        );
 
         for (const file of files) {
           const item = document.createElement('li');
           item.style.margin = '10px 0';
 
           const label = document.createElement('span');
+
           const name = String(file.key || '')
             .split('/')
             .pop()
             .replace(/^[0-9a-f-]{36}-/i, '');
 
-          label.textContent = name + ' (' + Number(file.size || 0).toLocaleString() + ' bytes) ';
+          label.textContent =
+            name +
+            ' (' +
+            Number(file.size || 0).toLocaleString() +
+            ' bytes) ';
 
+          // DOWNLOAD BUTTON
           const download = document.createElement('button');
           download.type = 'button';
           download.textContent = 'Download';
@@ -198,6 +307,7 @@
             downloadFile(file.key, name, download);
           });
 
+          // DELETE BUTTON
           const deleteButton = document.createElement('button');
           deleteButton.type = 'button';
           deleteButton.textContent = 'Delete';
@@ -210,52 +320,92 @@
           item.append(label, download, deleteButton);
           filesList.append(item);
         }
+
       } catch (error) {
         setStatus(error.message || 'Could not load library.', true);
       }
     }
 
+    // DOWNLOAD FILE
     async function downloadFile(key, name, button) {
       button.disabled = true;
+      setStatus('Downloading ' + name + '…');
+
+      let objectUrl = null;
 
       try {
-        const response = await fetch(
-          API + '/download?key=' + encodeURIComponent(key),
-          {
-            headers: {
-              Authorization: 'Bearer ' + libraryToken
-            }
+        if (!libraryToken) {
+          throw new Error('Please sign in again.');
+        }
+
+        const downloadUrl = new URL(API + '/download');
+        downloadUrl.searchParams.set('key', key);
+
+        const response = await fetch(downloadUrl, {
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer ' + libraryToken
           }
-        );
+        });
 
         if (!response.ok) {
-          throw new Error('Download failed (' + response.status + ').');
+          let message = 'Download failed (' + response.status + ').';
+
+          try {
+            const data = await response.json();
+            if (data.error) {
+              message = data.error;
+            }
+          } catch (_) {}
+
+          throw new Error(message);
         }
 
         const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
+
+        if (!blob.size) {
+          throw new Error('The downloaded file is empty.');
+        }
+
+        objectUrl = URL.createObjectURL(blob);
+
         const link = document.createElement('a');
+        link.href = objectUrl;
+        link.download = name || 'download';
+        link.style.display = 'none';
 
-        link.href = url;
-        link.download = name;
-
-        document.body.append(link);
+        document.body.appendChild(link);
         link.click();
         link.remove();
 
-        setTimeout(() => URL.revokeObjectURL(url), 30000);
-        setStatus('Download started: ' + name);
+        setStatus(
+          'Download started: ' +
+          name +
+          ' (' +
+          (blob.size / 1024 / 1024).toFixed(2) +
+          ' MB)'
+        );
 
       } catch (error) {
+        console.error('Download error:', error);
         setStatus(error.message || 'Download failed.', true);
+
       } finally {
+        if (objectUrl) {
+          setTimeout(() => {
+            URL.revokeObjectURL(objectUrl);
+          }, 60000);
+        }
+
         button.disabled = false;
       }
     }
 
-    // DELETE A FILE
+    // DELETE FILE
     async function deleteFile(key, name, button) {
-      if (!window.confirm('Delete "' + name + '" from your online library? This cannot be undone.')) {
+      if (!window.confirm(
+        'Delete "' + name + '" from your online library? This cannot be undone.'
+      )) {
         return;
       }
 
@@ -275,7 +425,9 @@
         const data = await response.json();
 
         if (!response.ok || !data.success) {
-          throw new Error(data.error || 'Delete failed (' + response.status + ').');
+          throw new Error(
+            data.error || 'Delete failed (' + response.status + ').'
+          );
         }
 
         setStatus('Deleted: ' + name);
@@ -308,7 +460,9 @@
         const data = await response.json();
 
         if (!response.ok || !data.token) {
-          throw new Error(data.error || 'Sign-in failed. Check the password.');
+          throw new Error(
+            data.error || 'Sign-in failed. Check the password.'
+          );
         }
 
         libraryToken = data.token;
@@ -320,6 +474,7 @@
 
       } catch (error) {
         setStatus(error.message || 'Sign-in failed.', true);
+
       } finally {
         loginButton.disabled = false;
       }
@@ -333,6 +488,11 @@
 
       if (!file) {
         setStatus('Choose a file first.', true);
+        return;
+      }
+
+      if (!libraryToken) {
+        setStatus('Please sign in again.', true);
         return;
       }
 
@@ -355,7 +515,9 @@
         const created = await createResponse.json();
 
         if (!createResponse.ok || !created.uploadId || !created.key) {
-          throw new Error(created.error || 'Could not start upload.');
+          throw new Error(
+            created.error || 'Could not start upload.'
+          );
         }
 
         uploadInfo = created;
@@ -363,15 +525,25 @@
         const parts = [];
         const totalParts = Math.ceil(file.size / CHUNK_SIZE);
 
-        for (let partNumber = 1; partNumber <= totalParts; partNumber++) {
+        for (
+          let partNumber = 1;
+          partNumber <= totalParts;
+          partNumber++
+        ) {
           const start = (partNumber - 1) * CHUNK_SIZE;
           const end = Math.min(start + CHUNK_SIZE, file.size);
           const chunk = file.slice(start, end);
 
           setStatus(
-            'Uploading ' + file.name + ': part ' +
-            partNumber + ' of ' + totalParts +
-            ' (' + Math.round((end / file.size) * 100) + '%)'
+            'Uploading ' +
+            file.name +
+            ': part ' +
+            partNumber +
+            ' of ' +
+            totalParts +
+            ' (' +
+            Math.round((end / file.size) * 100) +
+            '%)'
           );
 
           const partUrl = new URL(API + '/upload/part');
@@ -392,7 +564,8 @@
 
           if (!partResponse.ok || !partData.etag) {
             throw new Error(
-              partData.error || 'Upload failed on part ' + partNumber
+              partData.error ||
+              'Upload failed on part ' + partNumber
             );
           }
 
@@ -420,7 +593,9 @@
         const completed = await completeResponse.json();
 
         if (!completeResponse.ok || !completed.success) {
-          throw new Error(completed.error || 'Could not finish upload.');
+          throw new Error(
+            completed.error || 'Could not finish upload.'
+          );
         }
 
         fileInput.value = '';
@@ -441,6 +616,7 @@
                 Authorization: 'Bearer ' + libraryToken
               }
             });
+
           } catch (_) {
             // Incomplete uploads can be cleaned up separately.
           }
